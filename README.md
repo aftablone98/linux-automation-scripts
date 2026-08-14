@@ -32,6 +32,7 @@ Linux-Automation-Scripts/
 ```
 
 
-Made from scratch by Aftab Lone with Love
+
+Designed & coded from scratch By Aftab with ❤️
 
 
