@@ -20,7 +20,6 @@ This repository contains Bash scripts that help automate everyday Linux operatio
 The goal is to learn Linux administration while writing reusable automation scripts.
 
 ---
-
 ## 📂 Repository Structure
 
 ```
@@ -31,3 +30,8 @@ Linux-Automation-Scripts/
 ├── README.md               # Project documentation
 └── scripts/                # Future automation scripts
 ```
+
+
+Made from scratch by Aftab Lone with Love
+
+
