@@ -311,7 +311,7 @@ This repository will evolve as I continue learning DevOps.
 * ✅ User management automation
 * ✅ Disk monitoring
 * ✅ Process monitoring
-* [ ] Log monitoring
+* ✅ Log monitoring
 * [ ] Network diagnostics
 * [ ] Automated backups
 * [ ] Cron automation
