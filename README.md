@@ -308,9 +308,9 @@ This repository will evolve as I continue learning DevOps.
 * [x] Basic Bash scripting
 * [x] File and directory automation
 * [x] Linux permissions
-* [ ] User management automation
-* [ ] Disk monitoring
-* [ ] Process monitoring
+* [x] User management automation
+* [x] Disk monitoring
+* [x] Process monitoring
 * [ ] Log monitoring
 * [ ] Network diagnostics
 * [ ] Automated backups
