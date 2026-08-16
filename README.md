@@ -304,13 +304,13 @@ curl
 
 This repository will evolve as I continue learning DevOps.
 
-* [x] Linux fundamentals
-* [x] Basic Bash scripting
-* [x] File and directory automation
-* [x] Linux permissions
-* [x] User management automation
-* [x] Disk monitoring
-* [x] Process monitoring
+* [✅] Linux fundamentals
+* [✅] Basic Bash scripting
+* [✅] File and directory automation
+* [✅] Linux permissions
+* [✅] User management automation
+* [✅] Disk monitoring
+* [✅] Process monitoring
 * [ ] Log monitoring
 * [ ] Network diagnostics
 * [ ] Automated backups
