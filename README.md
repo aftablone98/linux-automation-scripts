@@ -304,7 +304,7 @@ curl
 
 This repository will evolve as I continue learning DevOps.
 
-* [✅] Linux fundamentals
+* ✅ Linux fundamentals
 * [✅] Basic Bash scripting
 * [✅] File and directory automation
 * [✅] Linux permissions
