@@ -1,25 +1,42 @@
 #!/bin/bash
 
-echo "================================"
-echo "       DISK USAGE MONITOR"
-echo "================================"
+# ==========================================
+# Linux Disk Usage Monitor
+# ==========================================
 
-echo "Checking disk usage..."
-echo
+THRESHOLD=80
 
-df -h /
+echo "=========================================="
+echo "          DISK USAGE MONITOR"
+echo "=========================================="
 
-echo
-echo "--------------------------------"
+echo "Hostname : $(hostname)"
+echo "Date     : $(date)"
+echo ""
 
-DISK_USAGE=$(df / | awk 'NR==2 {print $5}' | sed 's/%//')
+# Get disk information for root filesystem
+DISK_INFO=$(df -h / | tail -1)
 
-echo "Disk Usage: $DISK_USAGE%"
+FILESYSTEM=$(echo "$DISK_INFO" | awk '{print $1}')
+TOTAL=$(echo "$DISK_INFO" | awk '{print $2}')
+USED=$(echo "$DISK_INFO" | awk '{print $3}')
+AVAILABLE=$(echo "$DISK_INFO" | awk '{print $4}')
+USAGE=$(echo "$DISK_INFO" | awk '{print $5}' | tr -d '%')
 
-if [ "$DISK_USAGE" -ge 80 ]; then
-    echo "WARNING: Disk usage is above 80%!"
+echo "Filesystem : $FILESYSTEM"
+echo "Total      : $TOTAL"
+echo "Used       : $USED"
+echo "Available  : $AVAILABLE"
+echo "Usage      : $USAGE%"
+echo ""
+
+# Check disk usage
+if [ "$USAGE" -ge "$THRESHOLD" ]; then
+    echo "STATUS     : WARNING"
+    echo "Message    : Disk usage is above ${THRESHOLD}%!"
 else
-    echo "OK: Disk usage is under 80%."
+    echo "STATUS     : OK"
+    echo "Message    : Disk usage is within safe limits."
 fi
 
-echo "================================"
+echo "=========================================="
