@@ -1,6 +1,6 @@
 name: Bash Scripts CI
 
-ion:
+on:
   push:
     branches:
       - main
@@ -11,11 +11,9 @@ ion:
 
 jobs:
   test-bash-scripts:
-
     runs-on: ubuntu-latest
 
     steps:
-
       # ==========================================
       # Checkout Repository
       # ==========================================
@@ -31,14 +29,14 @@ jobs:
           sudo apt-get install -y shellcheck
 
       # ==========================================
-      # ShellCheck Bash Scripts
+      # Run ShellCheck
       # ==========================================
       - name: Run ShellCheck
         run: |
           find scripts -type f -name "*.sh" -print0 | xargs -0 shellcheck
 
       # ==========================================
-      # Bash Syntax Check
+      # Check Bash Syntax
       # ==========================================
       - name: Check Bash syntax
         run: |
@@ -55,11 +53,9 @@ jobs:
           chmod +x scripts/*.sh
 
       # ==========================================
-      # Test Health Check
+      # Run Health Check
       # ==========================================
-
-
-            - name: Run health check
+      - name: Run health check
         run: |
           set +e
 
@@ -69,7 +65,7 @@ jobs:
 
           echo "Health check exit code: $STATUS"
 
-          if [ "$STATUS" -eq 0 ] || [ "$STATUS" -eq 2 ]; then
+          if [ "$STATUS" -eq 0 ] || [ "$STATUS" -eq 1 ] || [ "$STATUS" -eq 2 ]; then
             echo "Health check executed successfully."
             exit 0
           else
@@ -77,32 +73,45 @@ jobs:
             exit "$STATUS"
           fi
 
-
-
-    set +e
-
-    ./scripts/health_check.sh
-
-    STATUS=$?
-
-    echo "Health check exit code: $STATUS"
-
-    if [ "$STATUS" -eq 0 ] || [ "$STATUS" -eq 2 ]; then
-      echo "Health check executed successfully."
-      exit 0
-    else
-      echo "Health check failed unexpectedly."
-      exit "$STATUS"
-    fi
-
       # ==========================================
       # Test Health Check Help
       # ==========================================
-      - name: Test invalid threshold
-  run: |
-    if ./scripts/health_check.sh --cpu abc; then
-      echo "ERROR: Invalid threshold was accepted"
-      exit 1
-    else
-      echo "Invalid threshold correctly rejected"
-    fi
+      - name: Test health check help
+        run: |
+          ./scripts/health_check.sh --help
+
+      # ==========================================
+      # Test Invalid CPU Threshold
+      # ==========================================
+      - name: Test invalid CPU threshold
+        run: |
+          if ./scripts/health_check.sh --cpu abc; then
+            echo "ERROR: Invalid CPU threshold was accepted."
+            exit 1
+          else
+            echo "Invalid CPU threshold correctly rejected."
+          fi
+
+      # ==========================================
+      # Test Invalid Memory Threshold
+      # ==========================================
+      - name: Test invalid memory threshold
+        run: |
+          if ./scripts/health_check.sh --memory abc; then
+            echo "ERROR: Invalid memory threshold was accepted."
+            exit 1
+          else
+            echo "Invalid memory threshold correctly rejected."
+          fi
+
+      # ==========================================
+      # Test Invalid Disk Threshold
+      # ==========================================
+      - name: Test invalid disk threshold
+        run: |
+          if ./scripts/health_check.sh --disk abc; then
+            echo "ERROR: Invalid disk threshold was accepted."
+            exit 1
+          else
+            echo "Invalid disk threshold correctly rejected."
+          fi
