@@ -3,32 +3,45 @@
 """
 Linux Log Monitor
 -----------------
-Searches Linux log files for errors, warnings,
+Scans Linux logs and reports errors, warnings,
 and critical messages.
 """
 
 import os
+import re
 from datetime import datetime
 
 
-# Configuration
 LOG_FILE = "/var/log/syslog"
 
+MAX_DISPLAY = 10
+
 KEYWORDS = {
-    "ERROR": ["error", "failed", "failure"],
-    "WARNING": ["warning", "warn"],
-    "CRITICAL": ["critical", "fatal"],
+    "CRITICAL": [
+        "critical",
+        "fatal",
+        "panic",
+    ],
+    "ERROR": [
+        "error",
+        "failed",
+        "failure",
+    ],
+    "WARNING": [
+        "warning",
+        "warn",
+    ],
 }
 
 
 def print_header():
-    print("=" * 50)
-    print("          LINUX LOG MONITOR")
-    print("=" * 50)
+    print("=" * 60)
+    print("              LINUX LOG MONITOR")
+    print("=" * 60)
     print(f"Hostname : {os.uname().nodename}")
-    print(f"Date     : {datetime.now()}")
+    print(f"Date     : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Log File : {LOG_FILE}")
-    print("=" * 50)
+    print("=" * 60)
     print()
 
 
@@ -37,82 +50,122 @@ def check_log_file():
         print(f"ERROR: Log file not found: {LOG_FILE}")
         return False
 
+    if not os.access(LOG_FILE, os.R_OK):
+        print(f"ERROR: Permission denied: {LOG_FILE}")
+        return False
+
     return True
 
 
+def classify_log(line):
+    """
+    Identify the severity of a log message.
+    """
+
+    line_lower = line.lower()
+
+    for severity in ["CRITICAL", "ERROR", "WARNING"]:
+        for keyword in KEYWORDS[severity]:
+            if re.search(rf"\b{re.escape(keyword)}\b", line_lower):
+                return severity
+
+    return None
+
+
 def scan_logs():
-    error_count = 0
-    warning_count = 0
-    critical_count = 0
+    counts = {
+        "CRITICAL": 0,
+        "ERROR": 0,
+        "WARNING": 0,
+    }
+
+    messages = {
+        "CRITICAL": [],
+        "ERROR": [],
+        "WARNING": [],
+    }
 
     print("Scanning logs...")
     print()
 
     try:
         with open(LOG_FILE, "r", errors="ignore") as log:
+
             for line in log:
 
-                line_lower = line.lower()
+                severity = classify_log(line)
 
-                if any(word in line_lower for word in KEYWORDS["CRITICAL"]):
-                    critical_count += 1
-                    print(f"[CRITICAL] {line.strip()}")
+                if severity:
+                    counts[severity] += 1
 
-                elif any(word in line_lower for word in KEYWORDS["ERROR"]):
-                    error_count += 1
-                    print(f"[ERROR]    {line.strip()}")
-
-                elif any(word in line_lower for word in KEYWORDS["WARNING"]):
-                    warning_count += 1
-                    print(f"[WARNING]  {line.strip()}")
+                    if len(messages[severity]) < MAX_DISPLAY:
+                        messages[severity].append(line.strip())
 
     except PermissionError:
-        print("ERROR: Permission denied.")
-        print("Try running the script with sudo.")
+        print("ERROR: Permission denied while reading the log.")
+        return None, None
 
-        return None
-
-    return error_count, warning_count, critical_count
+    return counts, messages
 
 
-def print_summary(results):
-    if results is None:
-        return
+def print_messages(messages):
+    for severity in ["CRITICAL", "ERROR", "WARNING"]:
 
-    error_count, warning_count, critical_count = results
+        if not messages[severity]:
+            continue
+
+        print("-" * 60)
+        print(f"{severity} MESSAGES")
+        print("-" * 60)
+
+        for message in messages[severity]:
+            print(f"[{severity}] {message}")
+
+        print()
+
+
+def print_summary(counts):
+
+    print("=" * 60)
+    print("                 LOG SUMMARY")
+    print("=" * 60)
+
+    print(f"Critical Messages : {counts['CRITICAL']}")
+    print(f"Error Messages    : {counts['ERROR']}")
+    print(f"Warning Messages  : {counts['WARNING']}")
 
     print()
-    print("=" * 50)
-    print("              LOG SUMMARY")
-    print("=" * 50)
 
-    print(f"Errors     : {error_count}")
-    print(f"Warnings   : {warning_count}")
-    print(f"Critical   : {critical_count}")
-
-    print()
-
-    if critical_count > 0:
-        print("STATUS     : CRITICAL")
-    elif error_count > 0:
-        print("STATUS     : WARNING")
+    if counts["CRITICAL"] > 0:
+        status = "CRITICAL"
+    elif counts["ERROR"] > 0:
+        status = "WARNING"
+    elif counts["WARNING"] > 0:
+        status = "ATTENTION"
     else:
-        print("STATUS     : OK")
+        status = "OK"
 
-    print("=" * 50)
+    print(f"Overall Status     : {status}")
+
+    print("=" * 60)
 
 
 def main():
+
     print_header()
 
     if not check_log_file():
         return
 
-    results = scan_logs()
+    counts, messages = scan_logs()
 
-    print_summary(results)
+    if counts is None:
+        return
+
+    print_messages(messages)
+
+    print_summary(counts)
 
 
 if __name__ == "__main__":
     main()
-
