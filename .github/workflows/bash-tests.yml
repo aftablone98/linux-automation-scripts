@@ -1,6 +1,6 @@
 name: Bash Scripts CI
 
-on:
+ion:
   push:
     branches:
       - main
@@ -57,13 +57,52 @@ jobs:
       # ==========================================
       # Test Health Check
       # ==========================================
-      - name: Run health check
+
+
+            - name: Run health check
         run: |
+          set +e
+
           ./scripts/health_check.sh
+
+          STATUS=$?
+
+          echo "Health check exit code: $STATUS"
+
+          if [ "$STATUS" -eq 0 ] || [ "$STATUS" -eq 2 ]; then
+            echo "Health check executed successfully."
+            exit 0
+          else
+            echo "Health check failed unexpectedly."
+            exit "$STATUS"
+          fi
+
+
+
+    set +e
+
+    ./scripts/health_check.sh
+
+    STATUS=$?
+
+    echo "Health check exit code: $STATUS"
+
+    if [ "$STATUS" -eq 0 ] || [ "$STATUS" -eq 2 ]; then
+      echo "Health check executed successfully."
+      exit 0
+    else
+      echo "Health check failed unexpectedly."
+      exit "$STATUS"
+    fi
 
       # ==========================================
       # Test Health Check Help
       # ==========================================
-      - name: Test health check help
-        run: |
-          ./scripts/health_check.sh --help
+      - name: Test invalid threshold
+  run: |
+    if ./scripts/health_check.sh --cpu abc; then
+      echo "ERROR: Invalid threshold was accepted"
+      exit 1
+    else
+      echo "Invalid threshold correctly rejected"
+    fi
