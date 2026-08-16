@@ -305,12 +305,12 @@ curl
 This repository will evolve as I continue learning DevOps.
 
 * ✅ Linux fundamentals
-* [✅] Basic Bash scripting
-* [✅] File and directory automation
-* [✅] Linux permissions
-* [✅] User management automation
-* [✅] Disk monitoring
-* [✅] Process monitoring
+* ✅ Basic Bash scripting
+* ✅ File and directory automation
+* ✅ Linux permissions
+* ✅ User management automation
+* ✅ Disk monitoring
+* ✅ Process monitoring
 * [ ] Log monitoring
 * [ ] Network diagnostics
 * [ ] Automated backups
