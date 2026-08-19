@@ -1,9 +1,15 @@
 # 🐧 Linux Automation Scripts
 
+[![Bash Scripts CI](https://github.com/aftablone98/linux-automation-scripts/actions/workflows/bash-tests.yml/badge.svg)](https://github.com/aftablone98/linux-automation-scripts/actions/workflows/bash-tests.yml)
+[![Bash](https://img.shields.io/badge/Bash-Scripting-4EAA25?logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
+[![Python](https://img.shields.io/badge/Python-Automation-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Linux](https://img.shields.io/badge/Linux-Ubuntu-E95420?logo=ubuntu&logoColor=white)](https://ubuntu.com/)
+[![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=github-actions&logoColor=white)](https://github.com/features/actions)
 
 
 
-> A collection of practical Bash scripts for automating common Linux system administration and DevOps tasks.
+
+> A collection of practical Bash and Python scripts for automating common Linux system administration and DevOps tasks.
 
 **Linux Automation Scripts** is a hands-on DevOps learning project focused on **Linux, Bash scripting, system administration, monitoring, automation, and reliability**.
 
