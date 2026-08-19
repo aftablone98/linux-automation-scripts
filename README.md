@@ -146,7 +146,7 @@ See the complete project architecture and CI workflow:
 
 
 
-```text
+
 linux-automation-scripts/
 │
 ├── README.md
@@ -166,11 +166,11 @@ linux-automation-scripts/
 │
 └── docs/
     └── examples.md
-```
+
 
 The repository will grow as new automation scripts are added.
 
----
+
 
 ## 🛠️ Getting Started
 
