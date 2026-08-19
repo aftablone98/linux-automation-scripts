@@ -11,6 +11,86 @@
 
 > > A practical Linux automation project built with Bash and Python, featuring system monitoring, health checks, logging, CLI configuration, exit codes, static analysis, and automated CI with GitHub Actions.
 
+## 🛠️ Scripts & Features
+
+This project contains practical Bash and Python automation scripts for
+Linux system administration, monitoring, troubleshooting, and DevOps tasks.
+
+| Script | Technology | Purpose |
+|---|---|---|
+| `hello.sh` | Bash | Simple introductory Bash script |
+| `system_info.sh` | Bash | Displays system and OS information |
+| `disk_monitor.sh` | Bash | Monitors disk usage and available space |
+| `disk_usage.sh` | Bash | Analyzes filesystem and directory disk usage |
+| `process_monitor.sh` | Bash | Monitors running processes and resource usage |
+| `network_check.sh` | Bash | Checks connectivity, IP address, DNS, and gateway |
+| `user_management.sh` | Bash | Automates common Linux user management tasks |
+| `health_check.sh` | Bash | Performs CPU, memory, and disk health checks |
+| `log_monitor.py` | Python | Monitors and analyzes Linux log files |
+| `cleanup.py` | Python | Automates cleanup of unwanted files |
+| `backup.py` | Python | Automates file and directory backups |
+| `service_monitor.py` | Python | Monitors Linux service status |
+
+### ⭐ Health Check
+
+The `health_check.sh` script is one of the main automation components.
+
+It supports:
+
+- CPU monitoring
+- Memory monitoring
+- Disk monitoring
+- Configurable thresholds
+- Command-line arguments
+- Input validation
+- Logging
+- Exit codes
+
+Example:
+
+```bash
+./scripts/health_check.sh
+
+
+
+### Custom thresholds
+
+You can configure CPU, memory, and disk warning thresholds using command-line arguments.
+
+
+```bash
+./scripts/health_check.sh --cpu 90 --memory 85 --disk 75
+
+
+
+🔄 Continuous Integration
+
+All Bash scripts are automatically validated using GitHub Actions.
+
+The CI pipeline performs:
+
+ShellCheck static analysis
+Bash syntax validation
+Health-check execution
+CLI help testing
+
+
+Workflow
+
+Git Push
+   ↓
+GitHub Actions
+   ↓
+ShellCheck
+   ↓
+Bash Syntax Check
+   ↓
+Health Check
+   ↓
+CLI Test
+   ↓
+✅ CI PASSED
+
 **Linux Automation Scripts** is a hands-on DevOps learning project focused on **Linux, Bash scripting, system administration, monitoring, automation, and reliability**.
 
 The goal is simple: learn Linux by building useful automation instead of only memorizing commands.
