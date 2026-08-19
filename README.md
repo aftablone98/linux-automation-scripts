@@ -9,7 +9,7 @@
 
 
 
-> A collection of practical Bash and Python scripts for automating common Linux system administration and DevOps tasks.
+> > A practical Linux automation project built with Bash and Python, featuring system monitoring, health checks, logging, CLI configuration, exit codes, static analysis, and automated CI with GitHub Actions.
 
 **Linux Automation Scripts** is a hands-on DevOps learning project focused on **Linux, Bash scripting, system administration, monitoring, automation, and reliability**.
 
@@ -55,6 +55,16 @@ The project will gradually include scripts for:
 ---
 
 ## 📂 Repository Structure
+ 
+
+## 🏗️ Architecture
+
+See the complete project architecture and CI workflow:
+
+👉 [View Architecture](docs/architecture.md) 
+
+
+
 
 ```text
 linux-automation-scripts/
