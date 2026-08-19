@@ -31,6 +31,54 @@ Linux system administration, monitoring, troubleshooting, and DevOps tasks.
 | `backup.py` | Python | Automates file and directory backups |
 | `service_monitor.py` | Python | Monitors Linux service status |
 
+## 🚀 Getting Started
+
+### Clone the repository
+
+```bash
+git clone https://github.com/aftablone98/linux-automation-scripts.git
+cd linux-automation-scripts
+```
+
+### Make Bash scripts executable
+
+```bash
+chmod +x scripts/*.sh
+```
+
+### Run the health check
+
+```bash
+./scripts/health_check.sh
+```
+
+## 💻 Usage Examples
+
+### System Information
+
+./scripts/system_info.sh
+
+### Disk Monitoring
+
+./scripts/disk_monitor.sh
+
+### Network Check
+
+./scripts/network_check.sh
+
+### Process Monitoring
+
+./scripts/process_monitor.sh
+
+### Server Health Check
+
+./scripts/health_check.sh
+
+### Custom Health Check Thresholds
+
+./scripts/health_check.sh --cpu 90 --memory 85 --disk 75
+
+
 ### ⭐ Health Check
 
 The `health_check.sh` script is one of the main automation components.
