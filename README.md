@@ -135,16 +135,7 @@ The project will gradually include scripts for:
 
 
 ## 📂 Repository Structure
- 
-
-## 🏗️ Architecture
-
-See the complete project architecture and CI workflow:
-
-👉 [View Architecture](docs/architecture.md) 
-
-
-
+```text
 
 
 linux-automation-scripts/
@@ -166,6 +157,12 @@ linux-automation-scripts/
 │
 └── docs/
     └── examples.md
+```
+## 🏗️ Architecture
+
+See the complete project architecture and CI workflow:
+
+👉 [View Architecture](docs/architecture.md)
 
 
 The repository will grow as new automation scripts are added.
