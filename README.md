@@ -132,7 +132,7 @@ The project will gradually include scripts for:
 | ⏰ Scheduling | Cron-based automation                 |
 | 🚀 DevOps    | Deployment and operational utilities  |
 
----
+
 
 ## 📂 Repository Structure
  
